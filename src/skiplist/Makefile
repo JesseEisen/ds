@@ -1,5 +1,5 @@
 CC=gcc
-SRC= stack.c example.c
+SRC= skiplist.c example.c
 OBJ= $(SRC:.c=.o)
 CFLAGS= -g -O2
 
