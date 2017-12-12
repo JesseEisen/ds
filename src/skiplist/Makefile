@@ -11,4 +11,4 @@ example: $(SRC) $(OBJ)
 
 .PHONY=clean
 clean:
-	rm -f example *.o
+	rm -f example *.o *.out *.dSYM
