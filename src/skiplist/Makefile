@@ -1,7 +1,7 @@
 CC=gcc
 SRC= skiplist.c example.c
 OBJ= $(SRC:.c=.o)
-CFLAGS= -g -O2
+CFLAGS= -pg -g -O2
 
 example: $(SRC) $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $@

@@ -10,7 +10,6 @@
 #include<time.h>
 #include "skiplist.h"
 
-
 sl_list * sl_create_list(){
     sl_list *sl = malloc(sizeof(struct skip_list));
     if(sl == NULL)
@@ -91,7 +90,7 @@ int sl_insert(sl_list *sl, int key, int value){
     if(q == NULL)
         return 0;
 
-    for(i = level-1; i>=0; i--){
+    for(i = level-1; i >= 0; i--){
         q->next[i] = update[i]->next[i];
         update[i]->next[i] = q;
     }
@@ -107,7 +106,7 @@ int sl_search(sl_list *sl, int key, int *val){
     int i = sl->level -1;
 
     for(; i >= 0; i--){
-        while((q=p->next[i]) && q->key < key){
+        while((q = p->next[i]) && q->key < key){
             p = q;
         }
 
@@ -143,25 +142,29 @@ int sl_del_node(sl_list *sl, int key){
                 sl->level--;
         }
     }
-
+    
+    free(q->next);
     free(q);
-    q=NULL;
+    q = NULL;
     return 1;
 }
 
 void sl_free(sl_list *sl){
     if(sl == NULL)
         return;
+    
+    int i;
 
     sl_node *q = sl->head;
     sl_node *next;
-
-    while(q){
-        next= q->next[0];
+   
+    while(q) {
+        next = q->next[0];
+        free(q->next);
         free(q);
         q = next;
     }
-
+    
     free(sl);
 }
 
@@ -174,7 +177,7 @@ void sl_dump(sl_list *sl){
         p = head->next[i];
         printf("level %d: ", i);
         while(p != NULL){
-            printf("%d  ",p->value);
+            printf("%d ",p->value);
             p = p->next[i];
         }
         printf("\n");
